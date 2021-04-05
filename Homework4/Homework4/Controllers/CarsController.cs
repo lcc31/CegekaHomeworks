@@ -11,7 +11,7 @@ namespace Homework4.Controllers
     {
         public List<EntityCar> _cars = DatabaseCars.Cars;
 
-        [HttpGet]
+        [HttpGet] 
         [Route("api/cars")]
         public ActionResult GetAllCars()
         {

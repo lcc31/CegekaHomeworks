@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[ACTUAL_FEATURES] (
+    [ACTUAL_FEATURE_ID] INT          NOT NULL,
+    [FUEL]              VARCHAR (50) NOT NULL,
+    [TRANSMISSION]      VARCHAR (50) NULL,
+    [HORSEPOWER]        INT          NULL,
+    [ACTUAL_PRICE]      INT          NULL,
+    CONSTRAINT [PK_ActualFeatures] PRIMARY KEY CLUSTERED ([ACTUAL_FEATURE_ID] ASC)
+);
+
