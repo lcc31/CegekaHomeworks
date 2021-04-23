@@ -10,14 +10,16 @@ export default (state = {}, action) => {
         ...state,
         [action.key]: action.updatedAlbum
       };
-    case actionTypes.DELETE_ALBUM:
+    case actionTypes.DELETE_ALBUM: {
       let { [action.key]: albumDeleted, ...restOfAlbums } = state;
       return restOfAlbums;
-    case actionTypes.ADD_ALBUM:
+    }
+    case actionTypes.ADD_ALBUM: {
       return {
         [action.key]: action.album,
         ...state
       };
+    }
     default:
       return state;
   }

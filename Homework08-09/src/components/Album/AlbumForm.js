@@ -4,7 +4,7 @@ import { Modal, Form, Button, Icon, Message } from 'semantic-ui-react'
 import { connect } from 'react-redux';
 import * as albumActions from '../../actions/albumActions';
 
-class AlbumForm extends React.Component {
+export class AlbumForm extends React.Component {
   state = {
     error: false,
     modalOpen: false,
@@ -40,7 +40,7 @@ class AlbumForm extends React.Component {
     return true;
   }
 
-  handleSubmit = (event) => {
+  handleSubmit = () => {
     if (!this.isFormValid()) {
       this.setState({ error: true });
       return;
@@ -154,6 +154,9 @@ class AlbumForm extends React.Component {
     formType: PropTypes.oneOf(['New', 'Edit']).isRequired,
     album: PropTypes.object,
     index: PropTypes.string,
+    photos: PropTypes.object.isRequired,
+    updateAlbum: PropTypes.func.isRequired,
+    createAlbum: PropTypes.func.isRequired,
   }
 }
 

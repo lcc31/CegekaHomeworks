@@ -1,13 +1,16 @@
+/* global describe, it, expect, shallow */
 import React from 'react';
 import App from './App';
-// import configureStore from '../../store/configureStore';
+import configureStore from '../../store/configureStore';
 
-// const store = configureStore();
+const store = configureStore();
 describe('App', () => {
   it('renders without crashing', () => {
-    // shallow(<App store={store} />);
+    shallow(<App store={store} />);
+  });
 
-    //expect(wrapper).toContainReact(welcome);
-    expect(true).toEqual(true);
+  it('to contains anything', () => {
+    const app = <App store={store} />;
+    expect.anything(app);
   });
 });
