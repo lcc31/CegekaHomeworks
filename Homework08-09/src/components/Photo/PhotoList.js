@@ -1,14 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Photo, { PhotoForm } from '../Photo';
 import { Card } from 'semantic-ui-react'
 import StatusBar from '../StatusBar';
 import { DeleteButton } from '../Common';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import * as photoActions from '../../actions/photoActions';
 
 const PhotoList = (props) => {
-  const { photos, deletePhoto, editPhoto, createPhoto } = props;
+  const { photos } = props;
 
   const renderPhoto = () => {
+    const { photoActions } = props;
     return (
       Object.keys(photos)
         .map(key => {
@@ -18,19 +21,16 @@ const PhotoList = (props) => {
             <Photo
               key={key}
               photo={photo}
-              deletePhoto={deletePhoto}
-              editPhoto={editPhoto}
             >
               <PhotoForm
                 formType='Edit'
                 photo={photo}
                 index={key}
-                editPhoto={editPhoto}
               />
               <DeleteButton
                 index={key}
                 objectName={photo.title}
-                deleteObject={deletePhoto}
+                deleteObject={photoActions.deletePhoto}
               />
             </Photo>
           );
@@ -43,7 +43,6 @@ const PhotoList = (props) => {
       <StatusBar title={`${Object.keys(photos).length} Photo(s) total`}>
         <PhotoForm
           formType='New'
-          createPhoto={createPhoto}
         />
       </StatusBar>
       <Card.Group itemsPerRow={6} doubling>
@@ -53,11 +52,16 @@ const PhotoList = (props) => {
   );
 }
 
-PhotoList.propTypes = {
-  photos: PropTypes.object.isRequired,
-  deletePhoto: PropTypes.func.isRequired,
-  editPhoto: PropTypes.func.isRequired,
-  createPhoto: PropTypes.func.isRequired,
-};
+const mapStateToProps = (state) => {
+  return {
+    photos: state.photos,
+  }
+}
 
-export default PhotoList;
+function mapDispatchToProps(dispatch) {
+  return {
+    photoActions: bindActionCreators(photoActions, dispatch),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PhotoList);
